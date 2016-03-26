@@ -1,0 +1,24 @@
+{block content}
+<div id="banner">
+	<h1 n:block=title>Váš účet</h1>
+</div>
+
+<div class="row">
+    <h2>Seznam mých věcí + administrace </h2>
+    {foreach $thinks as $think}
+	{$think->name} 
+	- <a n:href="Think:default thinkId => $think->id">Upravit</a>
+	- <a n:href="delete! thinkId => $think->id">Smazat</a>
+    {/foreach}
+</div>
+<div class="row">
+    <h2>Věci, které si mohu půjčovat </h2>
+</div>
+<div class="row">
+    <h2>Věci v koši </h2>
+    {foreach $deletedThinks as $deleteThink}
+	{$deleteThink->name}
+	- <a n:href="refresh! thinkId => $deleteThink->id">Obnovit</a>
+    {/foreach}
+</div>
+</div>

@@ -1,0 +1,20 @@
+{block content}
+<div class="row">
+	<h1 n:block=title>Congratulations!</h1>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+	    Vítáme vás na stránkách, které slouží pro usnadnění půjčování věcí.
+	    Můžete si zvolit, koho chcete ke své věci přidat, a kdo vás následně bude o půjčení žádat.
+	</div>
+	<div class="col-sm-6">
+	    {if $user->isLoggedIn()}
+		Věci, které si můžete půjčit spravujte na kartě svého 
+		<a n:href="Account:default">účtu.</a>
+	    {else}
+		Pro správu svého účtu se <a n:href="Login:default">přihlašte.</a>
+		Pokud účet nemáte, tak si ho <a n:href="Login:createAccount">založte.</a>
+	    {/if}
+	</div>
+</div>
