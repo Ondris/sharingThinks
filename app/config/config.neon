@@ -25,6 +25,7 @@ services:
 	- SharingThinks\Components\SignForm\SignFormFactory
 	- SharingThinks\Model\Think\ThinksRepository
 	- SharingThinks\Model\User\UsersRepository
+	- SharingThinks\Model\Uses\UsesRepository
 
 extensions:
     console: Kdyby\Console\DI\ConsoleExtension

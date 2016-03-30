@@ -6,9 +6,6 @@ use Nette\Application\UI\Form;
 
 class CreateAccountFactory {
 
-    const EDIT_USER = 0;
-    const NEW_USER = 1;
-
     /**
      * @return Form
      */

@@ -10,10 +10,20 @@ class AccountPresenter extends Nette\Application\UI\Presenter
     /** @var \SharingThinks\Model\Think\ThinksRepository $thinkRepository */
     private $thinksRepository;
     
+    /** @var \SharingThinks\Model\User\UsersRepository $usersRepository */
+    private $usersRepository;
+    
+    /** @var \SharingThinks\Model\Uses\UsesRepository $usesRepository */
+    private $usesRepository;
+
     private $userId;
 
-    public function injectServices(\SharingThinks\Model\Think\ThinksRepository $thinksRepository) {
+    public function injectServices(\SharingThinks\Model\Think\ThinksRepository $thinksRepository,
+     \SharingThinks\Model\User\UsersRepository $usersRepository,
+     \SharingThinks\Model\Uses\UsesRepository $usesRepository) {
 	$this->thinksRepository = $thinksRepository;
+	$this->usersRepository = $usersRepository;
+	$this->usesRepository = $usesRepository;
     }
     
     public function beforeRender() {
@@ -22,8 +32,11 @@ class AccountPresenter extends Nette\Application\UI\Presenter
     }
     
     public function renderDefault() {
-	$this->template->thinks = $this->thinksRepository->findThinksForUser($this->userId);
-	dump($this->template->thinks);
+	$uses = $this->usesRepository->getUses(1);
+	dump($uses);
+	$user = $this->usersRepository->getUser($this->userId);
+	dump($user);
+	$this->template->thinks = $this->thinksRepository->findThinksForUser($this->userId);	
 	$this->template->deletedThinks = $this->thinksRepository->findDeletedThinksForUser($this->userId);
     }
     

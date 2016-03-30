@@ -42,13 +42,13 @@ class Thinks extends \Kdyby\Doctrine\Entities\BaseEntity
     protected $pause;
     
         /**
-      * @ORM\Column(type="integer")
+      * @ORM\Column(name="owner_id", type="integer")
      */
     protected $ownerId;
     
         /**
-     * @manyToOne(targetEntity="Users")
-     * @joinColumn(name="owner_id", referencedColumnName="id")
+     * @ORM\manyToOne(targetEntity="\SharingThinks\Model\User\Users", inversedBy="myThinks")
+     * @ORM\joinColumn(name="owner_id", referencedColumnName="id")
      */
     protected $owner;
     
