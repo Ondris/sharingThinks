@@ -17,14 +17,20 @@ class ThinksRepository
     }
     
     public function saveThink($values, $user) {
-	$think = new \SharingThinks\Model\Think\Thinks();
+	if ($values->thinkId) {
+	    $think = $this->thisRepository
+		    ->find($values->thinkId);
+	} else {
+	    $think = new \SharingThinks\Model\Think\Thinks();
+	    $think->setOwner($user);
+	    $think->setCreationDate(new \Nette\Utils\DateTime('now'));
+	}
 	$think->setName($values->name);
 	$think->setDescription($values->description);
 	$think->setMinimum($values->minimum);
 	$think->setMaximum($values->maximum);
 	$think->setPause($values->pause);
-	$think->setOwnerId($user->getId());
-	$think->setCreationDate(new \Nette\Utils\DateTime('now'));
+	$think->setOpen($values->open);
 	$think->setVisible(1);
 	$this->entityManager->persist($think);
 	$this->entityManager->flush();
@@ -40,6 +46,13 @@ class ThinksRepository
 		->findBy(array('ownerId' => $userId, 'visible' => 0));
     }
     
+    public function findThinksToHire($userId) {
+	$query = $this->entityManager->createQuery('SELECT t FROM \SharingThinks\Model\Think\Thinks t '
+		. 'WHERE t.ownerId != :userId AND t.open = 1');
+	$query->setParameter('userId', $userId);
+	return $query->getResult();
+    }
+    
     public function deleteThink($thinkId) {
 	$think = $this->thisRepository->find($thinkId);
 	$think->setVisible(0);
@@ -52,5 +65,15 @@ class ThinksRepository
 	$think->setVisible(1);
 	$this->entityManager->persist($think);
 	$this->entityManager->flush();	 
+    }
+    
+    public function completeDeleteThink($thinkId) {
+	$think = $this->thisRepository->find($thinkId);
+	$this->entityManager->remove($think);
+	$this->entityManager->flush();
+    }
+    
+    public function getThink($thinkId) {
+	return $this->thisRepository->find($thinkId);
     }
 }

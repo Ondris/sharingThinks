@@ -20,9 +20,11 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
-	- SharingThinks\Components\Think\IThinkFactory
+	- SharingThinks\Components\Think\CreateThinkFactory
 	- SharingThinks\Components\CreateAccount\CreateAccountFactory
 	- SharingThinks\Components\SignForm\SignFormFactory
+	- SharingThinks\Components\UseThink\UseThinkFactory
+	- SharingThinks\Components\DefaultFormRenderer
 	- SharingThinks\Model\Think\ThinksRepository
 	- SharingThinks\Model\User\UsersRepository
 	- SharingThinks\Model\Uses\UsesRepository

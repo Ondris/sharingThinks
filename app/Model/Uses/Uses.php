@@ -22,20 +22,20 @@ class Uses extends \Kdyby\Doctrine\Entities\BaseEntity
     protected $thinkId;
     
     /**
-     * @ORM\manyToOne(targetEntity="\SharingThinks\Model\Think\Thinks")
+     * @ORM\manyToOne(targetEntity="\SharingThinks\Model\Think\Thinks", inversedBy="uses")
      * @ORM\joinColumn(name="think_id", referencedColumnName="id") 
      */
     protected $think;
     
     /**
-      * @ORM\Column(type="integer")
+      * @ORM\Column(type="datetime")
      */    
     protected $start;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime")
      */
-    protected $duration;
+    protected $end;
     
     /**
       * @ORM\Column(type="integer")
@@ -43,7 +43,7 @@ class Uses extends \Kdyby\Doctrine\Entities\BaseEntity
     protected $userId;
     
     /**
-     * @ORM\manyToOne(targetEntity="\SharingThinks\Model\User\Users")
+     * @ORM\manyToOne(targetEntity="\SharingThinks\Model\User\Users", inversedBy="uses")
      * @ORM\joinColumn(name="user_id", referencedColumnName="id") 
      */
     protected $user;

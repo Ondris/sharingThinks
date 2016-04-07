@@ -46,6 +46,12 @@ class UsersRepository implements \Nette\Security\IAuthenticator
 	$this->entityManager->flush();
     }
     
+    public function deleteUser($userId) {
+	$user = $this->thisRepository->find($userId);
+	$this->entityManager->remove($user);
+	$this->entityManager->flush();
+    }
+    
     	/**
 	 * Performs an authentication.
 	 * @return Nette\Security\Identity

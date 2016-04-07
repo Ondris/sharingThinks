@@ -1,24 +1,96 @@
 {block content}
 <div id="banner">
-	<h1 n:block=title>Váš účet</h1>
+    <h1 n:block=title>Váš účet</h1>
 </div>
 
 <div class="row">
+    <h2>Naplánované výpůjčky </h2>
+    <table class="table table-condensed">
+	<thead>
+	    <tr>
+		<th>Jméno</th>
+		<th>Čas</th>
+		<th></th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr n:foreach="$actualUser->uses as $use">
+		<td>{$use->think->name}</td>
+		<td>{$use->start->format('j.n.Y H:i')} - {$use->end->format('j.n.Y H:i')}</td>
+		<td>
+		    <a n:href="deleteUse! useId => $use->id">Zrušit výpůjčku</a>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
+</div>
+
+<div class="row" n:if="$thinks">
     <h2>Seznam mých věcí + administrace </h2>
-    {foreach $thinks as $think}
-	{$think->name} 
-	- <a n:href="Think:default thinkId => $think->id">Upravit</a>
-	- <a n:href="delete! thinkId => $think->id">Smazat</a>
-    {/foreach}
+    <table class="table table-condensed">
+	<thead>
+	    <tr>
+		<th>Jméno</th>
+		<th>Popis</th>
+		<th>Akce</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr n:foreach="$thinks as $think">
+		<td>{$think->name}</td>
+		<td>{$think->description}</td>
+		<td>
+		    <a n:href="Think:newThink thinkId => $think->id">Upravit</a>
+		    <a n:href="delete! thinkId => $think->id">Do koše</a>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
 </div>
-<div class="row">
+		
+<div class="row" n:if="$thinksToHire">
     <h2>Věci, které si mohu půjčovat </h2>
+    <table class="table table-condensed">
+	<thead>
+	    <tr>
+		<th>Jméno</th>
+		<th>Popis</th>
+		<th>Akce</th>		
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr n:foreach="$thinksToHire as $thinkToHire">
+		<td>{$thinkToHire->name}</td>
+		<td>{$thinkToHire->description}</td>
+		<td>
+		    <a n:href="Borrow:default thinkId => $thinkToHire->id">Půjčit si</a>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
 </div>
-<div class="row">
+
+<div class="row" n:if="$deletedThinks">
     <h2>Věci v koši </h2>
-    {foreach $deletedThinks as $deleteThink}
-	{$deleteThink->name}
-	- <a n:href="refresh! thinkId => $deleteThink->id">Obnovit</a>
-    {/foreach}
+    <table class="table table-condensed">
+	<thead>
+	    <tr>
+		<th>Jméno</th>
+		<th>Popis</th>
+		<th>Akce</th>		
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr n:foreach="$deletedThinks as $deleteThink">
+		<td>{$deleteThink->name}</td>
+		<td>{$deleteThink->description}</td>
+		<td>
+		    <a n:href="refresh! thinkId => $deleteThink->id">Obnovit</a>
+		    <a n:href="completeDelete! thinkId => $deleteThink->id">Smazat ze systému</a>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
 </div>
+
 </div>

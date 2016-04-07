@@ -37,17 +37,11 @@ class ProfilPresenter extends Nette\Application\UI\Presenter
 	$form['passwordVerify']->addConditionOn($form['password'], Form::FILLED)
 		->setRequired('Vyplňte prosím heslo ještě jednou pro kontrolu')
 		->addRule(Form::EQUAL, 'Hesla se neshodují', $form['password']);
-	$form['submit']->onClick = $this->editAccount;
-	$form->addSubmit('cancel', 'Zpět')
-		->onClick[] = $this->cancel;
+	$form['submit']->onClick[] = $this->editAccount;
 	
 	$form['name']->setDefaultValue($user->name);
 	$form['email']->setDefaultValue($user->email);
 	return $form;
-    }
-    
-    public function cancel() {
-	$this->redirect('Account:default');
     }
     
     public function editAccount($button) {
@@ -55,5 +49,12 @@ class ProfilPresenter extends Nette\Application\UI\Presenter
 	$this->usersRepository->editUser($values, $this->userId);
 	$this->flashMessage('Účet byl úspěšně upraven.');
 	$this->redirect('Account:default');
+    }
+    
+    public function handleDeleteUser() {
+	$this->getUser()->logout();
+	$this->usersRepository->deleteUser($this->getUser()->getId());
+	$this->flashMessage('Byl jste ze systému vymazán.');
+	$this->redirect('Homepage:default');	
     }
 }

@@ -41,6 +41,11 @@ class Thinks extends \Kdyby\Doctrine\Entities\BaseEntity
      */
     protected $pause;
     
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $open;
+    
         /**
       * @ORM\Column(name="owner_id", type="integer")
      */
@@ -61,5 +66,18 @@ class Thinks extends \Kdyby\Doctrine\Entities\BaseEntity
       * @ORM\Column(type="integer")
      */
     protected $visible;
+    
+     /**
+     * @ORM\oneToMany(targetEntity="\SharingThinks\Model\Uses\Uses", mappedBy="think")
+     */
+    protected $uses;
+    
+    public function getOwner() {
+	return $this->owner;
+    }
+    
+    public function setOwner(\SharingThinks\Model\User\Users $owner = NULL) {
+	$this->owner = $owner;
+    }
 
 }

@@ -47,19 +47,24 @@ class Users extends \Kdyby\Doctrine\Entities\BaseEntity
     protected $visible;
     
      /**
-     * @@ORM\oneToMany(targetEntity="\SharingThinks\Model\Think\Thinks", mappedBy="owner")
+     * @ORM\oneToMany(targetEntity="\SharingThinks\Model\Think\Thinks", mappedBy="owner")
      */
     protected $myThinks;
     
+     /**
+     * @ORM\oneToMany(targetEntity="\SharingThinks\Model\Uses\Uses", mappedBy="user")
+     */
+    protected $uses;
+    
       /**
-     * @manyToMany(targetEntity="Thinks")
-     * @joinTable(
+     * @ORM\manyToMany(targetEntity="\SharingThinks\Model\Think\Thinks")
+     * @ORM\joinTable(
      *     name="users_thinks",
      *     joinColumns={
-     *         @joinColumn(name="user_id", referencedColumnName="id")
+     *         @ORM\joinColumn(name="user_id", referencedColumnName="id")
      *     },
      *     inverseJoinColumns={
-     *         @joinColumn(name="think_id", referencedColumnName="id")
+     *         @ORM\joinColumn(name="think_id", referencedColumnName="id")
      *     }
      * )
      */
