@@ -72,6 +72,28 @@ class Thinks extends \Kdyby\Doctrine\Entities\BaseEntity
      */
     protected $uses;
     
+    /**
+     * @ORM\manyToMany(targetEntity="\SharingThinks\Model\User\Users")
+     * @ORM\joinTable(
+     *     name="users_thinks",
+     *     joinColumns={
+     *         @ORM\joinColumn(name="think_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\joinColumn(name="user_id", referencedColumnName="id")
+     *     }
+     * )
+     */   
+    private $users;
+    
+    public function getUsers() {
+	return $users;
+    }
+    
+    public function addUser(\SharingThinks\Model\User\Users $user) {
+	$this->users->add($user);
+    }
+    
     public function getOwner() {
 	return $this->owner;
     }

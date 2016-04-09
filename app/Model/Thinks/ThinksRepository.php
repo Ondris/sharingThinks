@@ -16,13 +16,13 @@ class ThinksRepository
 	$this->thisRepository = $this->entityManager->getRepository(\SharingThinks\Model\Think\Thinks::getClassName());
     }
     
-    public function saveThink($values, $user) {
+    public function saveThink($values, $owner, $users) {
 	if ($values->thinkId) {
 	    $think = $this->thisRepository
 		    ->find($values->thinkId);
 	} else {
 	    $think = new \SharingThinks\Model\Think\Thinks();
-	    $think->setOwner($user);
+	    $think->setOwner($owner);
 	    $think->setCreationDate(new \Nette\Utils\DateTime('now'));
 	}
 	$think->setName($values->name);
@@ -31,6 +31,11 @@ class ThinksRepository
 	$think->setMaximum($values->maximum);
 	$think->setPause($values->pause);
 	$think->setOpen($values->open);
+	if ($values->open == 1) {
+	    foreach ($users as $user) {
+		$think->addUser($user);
+	    }
+	}
 	$think->setVisible(1);
 	$this->entityManager->persist($think);
 	$this->entityManager->flush();

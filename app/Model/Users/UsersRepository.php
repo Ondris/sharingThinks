@@ -52,6 +52,30 @@ class UsersRepository implements \Nette\Security\IAuthenticator
 	$this->entityManager->flush();
     }
     
+    public function findUserPairs($key, $value) {
+	$query = $this->entityManager->createQueryBuilder()
+		->select('u')
+		->from(\SharingThinks\Model\User\Users::getClassName(), 'u')
+		->getQuery();
+
+	$res = $query->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_ARRAY);
+	$arr = array();
+	foreach ($res as $row) {
+		$arr[$row[$key]] = $row[$value];
+	}
+	return $arr;
+    }
+    
+    public function findUsers($userIds) {
+	$query = $this->entityManager->createQueryBuilder()
+		->select('u')
+		->from(\SharingThinks\Model\User\Users::getClassName(), 'u')
+		->andWhere('u.id IN (:ids)')
+		->getQuery();
+	$query->setParameter('ids', $userIds);
+	return $query->getResult();
+    }
+    
     	/**
 	 * Performs an authentication.
 	 * @return Nette\Security\Identity

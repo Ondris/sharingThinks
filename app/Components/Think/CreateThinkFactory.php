@@ -40,7 +40,13 @@ class CreateThinkFactory extends \Nette\Application\UI\Control {
 
 	$form->addText('pause', 'Čas potřebný pro předání:');
 
-	$form->addCheckbox('open', 'Viditělné pro všechny uživatele');
+	$form->addCheckbox('open', 'Vybrat uživatele, kteří si mohou věc půjčit:')
+		->addCondition($form::EQUAL, TRUE)
+		->toggle('usersIds');
+	
+	$users = $this->usersRepository->findUserPairs('id', 'name');
+	$form->addMultiSelect('users', '', array($users))
+		->setHtmlId('usersIds');
 	
 	$form->addHidden('thinkId', $thinkId);
 
@@ -55,8 +61,9 @@ class CreateThinkFactory extends \Nette\Application\UI\Control {
 
     public function saveThink($button) {
 	$values = $button->getForm()->getValues();
-	$user = $this->usersRepository->getUser($this->user->getId());
-	$this->thinkRepository->saveThink($values, $user);
+	$owner = $this->usersRepository->getUser($this->user->getId());
+	$users = $this->usersRepository->findUsers($values->users);
+	$this->thinkRepository->saveThink($values, $owner, $users);
     }
 
     public function setValuesForEditForm(\Nette\Application\UI\Form $form, $think) {

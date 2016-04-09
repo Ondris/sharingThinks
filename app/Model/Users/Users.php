@@ -56,18 +56,13 @@ class Users extends \Kdyby\Doctrine\Entities\BaseEntity
      */
     protected $uses;
     
-      /**
-     * @ORM\manyToMany(targetEntity="\SharingThinks\Model\Think\Thinks")
-     * @ORM\joinTable(
-     *     name="users_thinks",
-     *     joinColumns={
-     *         @ORM\joinColumn(name="user_id", referencedColumnName="id")
-     *     },
-     *     inverseJoinColumns={
-     *         @ORM\joinColumn(name="think_id", referencedColumnName="id")
-     *     }
-     * )
+    /**
+     * @ORM\manyToMany(targetEntity="\SharingThinks\Model\Think\Thinks", mappedBy="users")
      */
     private $thinks;
+    
+    public function getThinks() {
+	return $this->thinks;
+    }
 
 }
