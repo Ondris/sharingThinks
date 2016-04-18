@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 
 	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
 
-	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
+	<link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.datetimepicker.css">
+    </head>
 
-<body>
-    <div class="container">
-	<div class="row">
-	    <div class="btn-group">
-		<a n:href="Login:default, do => 'logout'" n:if="$user->isLoggedIn()" class="btn btn-primary">
-		    <font color="red">Odhlásit</font>
-		</a>
-		<a n:href="Homepage:default" class="btn btn-primary">
-		    Úvod
-		</a>
-		<a n:href="Login:default" n:if="!$user->isLoggedIn()" class="btn btn-primary">
-		    <font color="red">Příhlásit</font>
-		</a>
-		<a n:href="Login:createAccount" n:if="!$user->isLoggedIn()" class="btn btn-primary">
-		    Založit nového uživatele
-		</a>
-		<a n:href="Profil:edit" n:if="$user->isLoggedIn()" class="btn btn-primary">
-		    Upravit profil
-		</a>
-		<a n:href="Account:default" n:if="$user->isLoggedIn()" class="btn btn-primary">
-		    Můj účet
-		</a>
-		<a n:href="Think:newThink" n:if="$user->isLoggedIn()" class="btn btn-primary">
-		    Vytvořit novou věc
-		</a>
+    <body>
+	<div class="container">
+	    <div class="row">
+		<div class="btn-group">
+		    <a n:href="Login:default, do => 'logout'" n:if="$user->isLoggedIn()" class="btn btn-primary">
+			<font color="red">Odhlásit</font>
+		    </a>
+		    <a n:href="Homepage:default" class="btn btn-primary{if $presenter->isLinkCurrent('Homepage:*')} active {/if}">
+			Úvod
+		    </a>
+		    <a n:href="Login:default" n:if="!$user->isLoggedIn()" class="btn btn-primary{if $presenter->isLinkCurrent('Login:*')} active {/if}">
+			<font color="red">Příhlásit</font>
+		    </a>
+		    <a n:href="Login:createAccount" n:if="!$user->isLoggedIn()" class="btn btn-primary{if $presenter->isLinkCurrent('Login:*')} active {/if}">
+			Založit nového uživatele
+		    </a>
+		    <a n:href="Profil:edit" n:if="$user->isLoggedIn()" class="btn btn-primary{if $presenter->isLinkCurrent('Profil:*')} active {/if}">
+			Upravit profil
+		    </a>
+		    <a n:href="Account:default" n:if="$user->isLoggedIn()" class="btn btn-primary{if $presenter->isLinkCurrent('Account:*')} active {/if}">
+			Můj účet
+		    </a>
+		    <a n:href="Think:newThink" n:if="$user->isLoggedIn()" class="btn btn-primary{if $presenter->isLinkCurrent('Think:*')} active {/if}">
+			Vytvořit novou věc
+		    </a>
+		</div>
 	    </div>
-	</div>
-	<div class="row">
-	    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-	</div>
+	    <div class="row">
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	    </div>
 
-	{include content}
-	
-    </div>
+	    {include content}
+
+	</div>
 
 	{block scripts}
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -52,13 +52,22 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://cdn.rawgit.com/vojtech-dobes/nette.ajax.js/2.0.0/nette.ajax.js"></script>
 	<script src="{$basePath}/js/moment.js"></script>
+	<script src="{$basePath}/js/jquery.datetimepicker.full.min.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
-	
+
 	<script>
-	    $(function () {
+	    $(function() {
 		$.nette.init();
+	    });
+
+	    jQuery.datetimepicker.setLocale('cs');
+	    $('#startDateTime, #endDateTime').datetimepicker({
+		minDate: '0',
+		inline: true,
+		format: 'd.m.Y H:i',
+		lang: 'cs'
 	    });
 	</script>
 	{/block}
-</body>
+    </body>
 </html>

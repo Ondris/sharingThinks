@@ -7,11 +7,27 @@
     <h2>{$think->name} </h2>
     {$think->description} <br />
     {control useThinkForm}
-    Pokud se chcete majitele věci na něco zeptat, tak mu můžete napsat na e-mail {$think->owner->email}
+    <p n:if="$think->owner->email"> 
+	Pokud se chcete majitele věci na něco zeptat, tak mu můžete napsat na e-mail {$think->owner->email} 
+    </p>
 </div>
-<div class="row">
-    Seznam použití věci: <br />
-    {foreach $think->uses as $uses}
-	{$uses->start->format('j.n.Y H:i')} - {$uses->end->format('j.n.Y H:i')} {$uses->user->name}
-    {/foreach}
+<div class="row" n:if="!$think->uses">
+    <p>Věc si nikdo neplánuje vypůjčit.</p>
+</div>
+<div class="row" n:if="$think->uses">
+    <h2>Seznam výpůjček</h2>
+    <table class="table table-condensed">
+	<thead>
+	    <tr>
+		<th>Jméno uživatele</th>
+		<th>Čas</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr n:foreach="$think->uses as $uses">
+		<td>{$uses->user->name}</td>
+		<td>{$uses->start->format('j.n.Y H:i')} - {$uses->end->format('j.n.Y H:i')}</td>
+	    </tr>
+	</tbody>
+    </table>
 </div>

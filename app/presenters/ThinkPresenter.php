@@ -24,14 +24,14 @@ class ThinkPresenter extends Nette\Application\UI\Presenter {
     protected function createComponentThink() {
 	$thinkId = $this->getParameter('thinkId');
 	$form = $this->createThinkFactory->create($thinkId);
-	
+
 	if ($thinkId) {
 	    $think = $this->thinksRepository->getThink($thinkId);
 	    $this->createThinkFactory->setValuesForEditForm($form, $think);
 	}
 
 	$form->onSuccess[] = function (\Nette\Application\UI\Form $form) {
-	    $this->flashMessage('Záznam byl úspěšně založen.');
+	    $this->flashMessage('Záznam byl úspěšně uložen.', 'alert alert-success');
 	    $this->redirect('Account:default');
 	};
 

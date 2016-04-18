@@ -26,6 +26,8 @@ class DefaultFormRenderer extends \Nette\Object{
 		    $control->getControlPrototype()->addClass('btn btn-primary');
 		} elseif (in_array($type, ['text', 'password'], TRUE)) {
 		    $control->getControlPrototype()->addClass('form-control');
+		} elseif ($type === 'multiselect') {
+		    $control->getControlPrototype()->addClass('form-control');
 		}
 	}
     }

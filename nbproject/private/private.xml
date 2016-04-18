@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp2/htdocs/sharingthinks/app/presenters/ProfilPresenter.php</file>
             <file>file:/C:/xampp2/htdocs/sharingthinks/app/Model/Uses/Uses.php</file>
-            <file>file:/C:/xampp2/htdocs/sharingthinks/app/Model/Thinks/Thinks.php</file>
             <file>file:/C:/xampp2/htdocs/sharingthinks/app/Model/Users/UsersRepository.php</file>
             <file>file:/C:/xampp2/htdocs/sharingthinks/app/Model/Thinks/ThinksRepository.php</file>
-            <file>file:/C:/xampp2/htdocs/sharingthinks/app/presenters/ThinkPresenter.php</file>
-            <file>file:/C:/xampp2/htdocs/sharingthinks/app/Model/Users/Users.php</file>
-            <file>file:/C:/xampp2/htdocs/sharingthinks/app/Components/Think/CreateThinkFactory.php</file>
-            <file>file:/C:/xampp2/htdocs/sharingthinks/app/presenters/AccountPresenter.php</file>
+            <file>file:/C:/xampp2/htdocs/sharingthinks/app/Model/Uses/UsesRepository.php</file>
         </group>
     </open-files>
 </project-private>

@@ -5,11 +5,16 @@ namespace SharingThinks\Components\CreateAccount;
 use Nette\Application\UI\Form;
 
 class CreateAccountFactory {
-    
+
+    /** @var \SharingThinks\Components\DefaultFormRenderer */
     private $defaultFormRenderer;
-    
-    public function __construct(\SharingThinks\Components\DefaultFormRenderer $defaultFormRenderer) {
+
+    /** @var \SharingThinks\Model\User\UsersRepository */
+    private $usersRepository;
+
+    public function __construct(\SharingThinks\Components\DefaultFormRenderer $defaultFormRenderer, \SharingThinks\Model\User\UsersRepository $usersRepository) {
 	$this->defaultFormRenderer = $defaultFormRenderer;
+	$this->usersRepository = $usersRepository;
     }
 
     /**
@@ -30,9 +35,10 @@ class CreateAccountFactory {
 		->addRule(Form::EMAIL, 'E-mail nemá správný formát');
 
 	$form->addSubmit('submit', 'Odeslat');
-	
+
 	$this->defaultFormRenderer->setFormRenderer($form);
 
 	return $form;
     }
+
 }

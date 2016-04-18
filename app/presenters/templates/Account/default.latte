@@ -3,7 +3,7 @@
     <h1 n:block=title>Váš účet</h1>
 </div>
 
-<div class="row">
+<div class="row" n:if="$actualUser->uses">
     <h2>Naplánované výpůjčky </h2>
     <table class="table table-condensed">
 	<thead>
@@ -40,8 +40,9 @@
 		<td>{$think->name}</td>
 		<td>{$think->description}</td>
 		<td>
-		    <a n:href="Think:newThink thinkId => $think->id">Upravit</a>
-		    <a n:href="delete! thinkId => $think->id">Do koše</a>
+		    <a n:href="Borrow:default thinkId => $think->id">Rezervace</a>
+		    - <a n:href="Think:newThink thinkId => $think->id">Upravit</a>
+		    - <a n:href="delete! thinkId => $think->id">Do koše</a>
 		</td>
 	    </tr>
 	</tbody>
@@ -63,7 +64,7 @@
 		<td>{$thinkToHire->name}</td>
 		<td>{$thinkToHire->description}</td>
 		<td>
-		    <a n:href="Borrow:default thinkId => $thinkToHire->id">Půjčit si</a>
+		    <a n:href="Borrow:default thinkId => $thinkToHire->id">Rezervace</a>
 		</td>
 	    </tr>
 	</tbody>
@@ -86,7 +87,11 @@
 		<td>{$deleteThink->description}</td>
 		<td>
 		    <a n:href="refresh! thinkId => $deleteThink->id">Obnovit</a>
-		    <a n:href="completeDelete! thinkId => $deleteThink->id">Smazat ze systému</a>
+		    <a n:href="completeDelete! thinkId => $deleteThink->id" n:tag-if="!$deleteThink->uses">
+			<abbr n:tag-if="$deleteThink->uses" title="Smazat ze systému můžete věc bez aktuálních výpůjček.">
+			    Smazat ze systému
+			</abbr>
+		    </a>
 		</td>
 	    </tr>
 	</tbody>

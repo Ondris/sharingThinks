@@ -18,38 +18,13 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Založit nového uživatele</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=frm-createAccountForm-name</td>
-	<td>selenium</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=frm-createAccountForm-password</td>
-	<td>selenium</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=frm-createAccountForm-passwordVerify</td>
-	<td>selenium</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=frm-createAccountForm-email</td>
-	<td>selenium@google.com</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=_submit</td>
+	<td>link=Příhlásit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=frm-signInForm-username</td>
-	<td>selenium</td>
+	<td>seleniumUser</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -63,32 +38,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Vytvořit novou věc</td>
+	<td>link=Můj účet</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=frm-think-name</td>
-	<td>selenium think</td>
+	<td>clickAndWait</td>
+	<td>link=Do koše</td>
+	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=frm-think-description</td>
-	<td>Vyzkoušení přidání nové věci</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=frm-think-minimum</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=minimum[hour]</td>
-	<td>2</td>
+	<td>verifyText</td>
+	<td>//div[5]/h2</td>
+	<td>Věci v koši</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=ok</td>
+	<td>link=Obnovit</td>
 	<td></td>
 </tr>
 <tr>
@@ -98,28 +63,18 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Do koše</td>
+	<td>link=Upravit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Smazat ze systému</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Upravit profil</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Smazat profitl</td>
+	<td>link=Odhlásit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div[2]/div[2]/div</td>
-	<td>Byl jste ze systému vymazán.</td>
+	<td>css=h1</td>
+	<td>Sharing thinks</td>
 </tr>
 </tbody></table>
 </body>
